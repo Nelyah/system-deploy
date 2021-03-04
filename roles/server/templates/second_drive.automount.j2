@@ -1,0 +1,9 @@
+[Unit]
+Description=Automount for second data drive
+
+[Automount]
+Where={{ second_drive_mount_dest }}
+TimeoutIdleSec=300
+
+[Install]
+WantedBy=multi-user.target

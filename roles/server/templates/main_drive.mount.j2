@@ -1,0 +1,11 @@
+[Unit]
+Description=Data drive
+
+[Mount]
+What=/dev/disk/by-uuid/{{ main_drive_uuid }}
+Where={{ main_drive_mount_dest }}
+Type={{ main_drive_fs_format }}
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target

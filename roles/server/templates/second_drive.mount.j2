@@ -1,0 +1,11 @@
+[Unit]
+Description=Second data drive
+
+[Mount]
+What=/dev/disk/by-uuid/{{ second_drive_uuid }}
+Where={{ second_drive_mount_dest }}
+Type={{ second_drive_fs_format }}
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target

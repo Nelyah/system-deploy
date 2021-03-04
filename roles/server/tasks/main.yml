@@ -1,0 +1,10 @@
+---
+
+- name: Setup ssh
+  import_tasks: ssh.yml
+
+- name: Setup the cronjobs
+  import_tasks: cron.yml
+
+- name: Setup the hard drives
+  import_tasks: hard_drives.yml

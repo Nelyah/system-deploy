@@ -1,0 +1,25 @@
+---
+
+include_vars:
+  file: vault_system.yml
+
+ssh_server_port: '{{ vault_ssh_server_port }}'
+ssh_laptop_port: '{{ vault_ssh_laptop_port }}'
+
+users: '{{ vault_users }}'
+crontab_user: '{{ vault_crontab_user }}'
+
+docker_data_dir: '{{ vault_docker_data_dir }}'
+
+main_drive_uuid: '{{ vault_main_drive_uuid }}'
+main_drive_mount_dest: '{{ vault_main_drive_mount_dest }}'
+main_drive_unit_file_dest: '{{ vault_main_drive_unit_file_dest }}'
+second_drive_uuid: '{{ vault_second_drive_uuid }}'
+second_drive_mount_dest: '{{ vault_second_drive_mount_dest }}'
+second_drive_unit_file_dest: '{{ vault_second_drive_unit_file_dest }}'
+second_drive_automount_unit_file_dest: '{{ vault_second_drive_automount_unit_file_dest }}'
+
+homeserver_repo_dir: '{{ vault_homeserver_repo_dir }}'
+
+main_drive_fs_format: '{{ vault_main_drive_fs_format }}'
+second_drive_fs_format: '{{ vault_second_drive_fs_format }}'

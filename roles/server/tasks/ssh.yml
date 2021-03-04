@@ -1,0 +1,27 @@
+---
+
+- name: debug
+  debug:
+    msg: '{{ users | selectattr("can_ssh", "equalto", True) | map(attribute="login") | join(" ") }}'
+
+- name: Apply the sshd_config
+  template:
+    src: sshd_config_server.j2
+    dest: /etc/ssh/sshd_config
+  notify: 'reload sshd'
+
+- name: 'Add ssh port {{ ssh_server_port }} in selinux policy'
+  seport:
+    setype: 'ssh_port_t'
+    ports: '{{ ssh_server_port }}'
+    proto: 'tcp'
+    state: 'present'
+  when: ansible_facts['os_family'] == 'RedHat'
+
+- name: 'Add ssh port {{ ssh_server_port }} in firewalld policy'
+  command: 'firewall-cmd --permanent --service=ssh --{{ item.state }}-port={{ item.port }}'
+  loop:
+    - { port: '{{ ssh_server_port }}/tcp', state: 'add'}
+    - { port: '22/tcp', state: 'remove'}
+  notify: 'reload firewalld'
+  when: ansible_facts['os_family'] == 'RedHat'

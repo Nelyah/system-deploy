@@ -1,0 +1,47 @@
+---
+
+- name: Install packages
+  package:
+    name:
+      - jq
+      - neovim
+      - ctags
+      - curl
+      - gdb
+      - htop
+      - ncdu
+      - net-tools
+      - rsync
+      - tmux
+      - youtube-dl
+      - zsh
+      - ripgrep
+      - msmtp
+      - isync
+      - python3
+      - git
+      - wget
+      - curl
+      - cmake
+    state: present
+    update_cache: true
+
+- name: Install Debian packages
+  package:
+    name:
+      - build-essential
+      - golang-go
+      - fzf
+      - neomutt
+      - notmuch
+    state: present
+    update_cache: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install RedHat packages
+  package:
+    name:
+      - golang
+    state: present
+    update_cache: true
+  when: ansible_facts['os_family'] == "RedHat"

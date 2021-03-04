@@ -1,0 +1,46 @@
+---
+
+- name: Check that the main disk is present
+  register: disk_uuid
+  stat:
+    path: '/dev/disk/by-uuid/{{ vault_main_drive_uuid }}'
+
+- assert:
+    that: disk_uuid.stat.islnk is defined
+    fail_msg: Main disk UUID could not be found!
+
+- name: Setup the main drive
+  template:
+    src: main_drive.mount.j2
+    dest: '{{ main_drive_unit_file_dest }}'
+
+- name: Check that the second disk is present
+  register: disk_uuid
+  stat:
+    path: '/dev/disk/by-uuid/{{ vault_second_drive_uuid }}'
+
+- assert:
+    that: disk_uuid.stat.islnk is defined
+    fail_msg: Second disk UUID could not be found!
+
+- name: Setup the second drive
+  template:
+    src: second_drive.mount.j2
+    dest: '{{ second_drive_unit_file_dest }}'
+
+- name: Setup the second drive automount
+  template:
+    src: second_drive.automount.j2
+    dest: '{{ second_drive_unit_file_dest }}'
+
+- name: Start and enable main drive
+  service:
+    name: '{{ main_drive_unit_file_dest | basename }}'
+    state: started
+    enabled: yes
+
+- name: Start and enable second drive automount
+  service:
+    name: '{{ second_drive_automount_unit_file_dest | basename }}'
+    state: started
+    enabled: yes
