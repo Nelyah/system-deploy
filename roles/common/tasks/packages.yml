@@ -42,6 +42,7 @@
   package:
     name:
       - golang
+      - policycoreutils-python
     state: present
     update_cache: true
   when: ansible_facts['os_family'] == "RedHat"
