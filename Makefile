@@ -1,7 +1,7 @@
 ANSIBLE := $(shell command -v ansible-playbook 2> /dev/null)
 PIP2 := $(shell command -v pip2 2> /dev/null)
 JINJA2_PACKAGE := $(shell command pip2 list | grep -F Jinja2)
-ENCRYPTED_FILES := group_vars/all/vault_system.yml roles/server/files/cert.pem roles/server/files/key.pem roles/server/files/https-cert.pem roles/server/files/https-key.pem roles/server/vars/vault_syncthing.yml
+ENCRYPTED_FILES := group_vars/all/vault_system.yml roles/server/files/cert.pem roles/server/files/key.pem roles/server/files/https-cert.pem roles/server/files/https-key.pem roles/server/vars/vault_syncthing.yml roles/common/files/ssh_config roles/server/files/ssh_config_1/*
 
 all:
 
@@ -26,4 +26,7 @@ endif
 encrypt: $(ENCRYPTED_FILES)
 	ansible-vault encrypt $(ENCRYPTED_FILES)
 
-.PHONY: server jinja2 pip2_install encrypt all ansible
+decrypt: $(ENCRYPTED_FILES)
+	ansible-vault decrypt $(ENCRYPTED_FILES)
+
+.PHONY: server jinja2 pip2_install encrypt all ansible decrypt
