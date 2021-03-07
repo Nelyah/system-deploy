@@ -23,6 +23,7 @@
       - wget
       - curl
       - cmake
+      - syncthing
     state: present
     update_cache: true
 

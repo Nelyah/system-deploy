@@ -1,0 +1,8 @@
+include_vars:
+  file: vault_syncthing.yml
+
+syncthing_device: '{{ vault_syncthing_device }}'
+syncthing_introducer: '{{ vault_syncthing_introducer }}'
+
+syncthing_gui_apikey: '{{ vault_syncthing_gui_apikey }}'
+syncthing_user: '{{ vault_syncthing_user }}'

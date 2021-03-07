@@ -1,7 +1,10 @@
 ---
 
-- name: Setup ssh
-  import_tasks: ssh.yml
+# - name: Setup ssh
+#   import_tasks: ssh.yml
+
+- name: Setup Syncthing
+  import_tasks: syncthing.yml
 
 - name: Setup the cronjobs
   import_tasks: cron.yml
