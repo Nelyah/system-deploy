@@ -6,6 +6,7 @@ include_vars:
 ssh_server_port: '{{ vault_ssh_server_port }}'
 ssh_laptop_port: '{{ vault_ssh_laptop_port }}'
 
+ssh_config_path: '{{ vault_ssh_config_path }}'
 users: '{{ vault_users }}'
 crontab_user: '{{ vault_crontab_user }}'
 
